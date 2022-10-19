@@ -1,0 +1,125 @@
+jQuery(function($){
+  var iron = navigator.userAgent.indexOf("Iron");
+  var orig_edge = navigator.userAgent.indexOf("Edge");
+  var chromium_edge = navigator.userAgent.indexOf("Edg");
+  // Edge is detected if either of these is > -1
+  var edge = Math.max(orig_edge, chromium_edge);
+  var firefox = navigator.userAgent.indexOf("Firefox");
+  var opera = navigator.userAgent.indexOf('OPR');
+  var isChrome = $.browser.chrome;
+  var isMobile = false;
+
+  var logDownloadThenRedirect = function(installLink, location) {
+    if (typeof ga !== 'undefined') {
+        ga('gatracker.send', 'event', 'button', 'click', 'Install Button');
+    }
+    if (typeof _logV2DownloadButtonClick !== "function") {
+      // Just redirect...we can't log anyway.
+      window.location.href = installLink;
+      return true;
+    }
+    if (window.Promise) { // Don't make promises we can't keep
+      var logCallback = new Promise(function(resolve) {
+        _logV2DownloadButtonClick(_ADBLOCK_PROPER, location, function() { resolve(); });
+      });
+      var maxWait = new Promise(function(resolve) {
+        setTimeout(function() {
+          resolve();
+        }, 500);
+      });
+      // Whichever [resolves first], then redirect
+      Promise.race([logCallback, maxWait]).then(function() {
+        window.location.href = installLink;
+      });
+    } else {
+        _logV2DownloadButtonClick(_ADBLOCK_PROPER, location);
+        setTimeout(function() {
+          window.location.href = installLink;
+        }, 100);
+      }
+  };
+
+  function createDownloadListener() {
+    // $(".install-action").one("click", function(e) {
+    $(".getAdBlockButtonLarge, .BrowserButtonLarge").one("click", function(e) {
+      e.preventDefault();
+      const location = $(this).data("location") || "";
+      logDownloadThenRedirect($(this).attr('href'), location);
+    });
+  }
+
+  function hideInstallButton() {
+    $("#install-action").hide();
+    $("#second-install-action").hide();
+  }
+
+  var replaceLinks = function(installLink) {
+    if (installLink === null || typeof installLink !== "string") {
+      hideInstallButton();
+      return false;
+    }
+    
+    // Only replace links on the homepage, not browser specific pages
+    $(".getAdBlockButtonLarge").each(function() {
+      $(this).attr("href", installLink);
+    });
+    createDownloadListener();
+  };
+
+  if (isChrome && iron < 0 && opera < 0 && edge < 0) {
+    replaceLinks("https://chrome.google.com/webstore/detail/gighmmpiobklfepjocnamgkkbiglidom");
+  }
+  else if (opera > -1) {
+    replaceLinks("https://addons.opera.com/en/extensions/details/adblockforopera/");
+    $("#pwyw_nav_btn").show();
+    $("#pwyw").show();
+    $("#not-available").hide();
+  }
+  else if (edge > -1) {
+    replaceLinks("https://microsoftedge.microsoft.com/addons/detail/ndcileolkflehcjpmjnfbnaibdcgglog");
+    $("#pwyw_nav_btn").show();
+    $("#pwyw").show();
+    $("#not-available").hide();
+  }
+  else if (firefox > -1) {
+    replaceLinks("https://addons.mozilla.org/en-US/firefox/addon/adblock-for-firefox/");
+    $("#pwyw_nav_btn").show();
+    $("#pwyw").show();
+    $("#not-available").hide();
+  }
+  // Check for iOS, iPhone, iPad, and iPod
+  else if (/iPhone|iPad|iPod/i.test(navigator.userAgent) && $.browser.webkit && !$.browser.chrome) {
+    isMobile = true;
+    replaceLinks("https://itunes.apple.com/us/app/adblock-mobile/id1036484810");
+  }
+  else if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+    //installElement = '<a id="disabled"></a>';
+    replaceLinks();
+    $("#pwyw_nav_btn").hide();
+    $("#pwyw").hide();
+    $("#not-available").show();
+  }
+  else if ($.browser.webkit && !$.browser.chrome) {
+    replaceLinks("https://itunes.apple.com/us/app/adblock-for-safari/id1402042596?ls=1&mt=12");
+  }
+  // Check for Safari 5.05
+  else if ($.browser.webkit && !isChrome && !/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+    $("#safari").show();
+    // If Safari 5.05...
+    if($.browser.version.slice(0,3) < 600) {
+      // $("#header").before()
+      // $("img#try").remove();
+      // $("#embed").remove();
+      // $("#hero").append("<div id='safari_plugin_box'>");
+    }
+  }
+  else if (iron > -1) {
+    replaceLinks("https://chrome.google.com/webstore/detail/gighmmpiobklfepjocnamgkkbiglidom");
+  }
+  else {
+    replaceLinks();
+    $("#pwyw_nav_btn").hide();
+    $("#pwyw").hide();
+    $("#not-available").show();
+  }
+});

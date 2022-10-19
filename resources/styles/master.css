@@ -1,0 +1,304 @@
+ 
+.btclabel{
+  color:goldenrod;
+  font-weight:bold
+  }
+  
+  .container{
+      float:left;
+      border:2px solid transparent;
+      background:black;
+      height: 30px;
+      width:300px;
+      margin-top:2px;
+      padding-top:5px;
+      font-size: 16px;
+   
+  }
+  .widgetCarrier{
+      position:absolute;
+       height: 20px;
+      width:2000px;
+     
+  }
+  
+  .widgetCarrier2{
+      position:absolute;
+       height: 20px;
+      width:2000px;
+      margin-top:-50px; 
+      
+  }
+  .container_in{
+      color:green;
+      margin-top:30px;
+  }
+  
+  .container_img{
+  width:18px;
+  margin-right:5px;
+  padding-right:5px;
+  padding-bottom: 5px;
+  }
+  
+  ::placeholder{
+      color:white;
+      font-family:siracha;
+      color:red
+  }
+  
+  .qrFrame{
+      width:200px;
+      height:100px;
+      background:red;
+      margin-bottom:10px;
+      margin-top:10px
+      
+  }
+
+  @font-face {
+    font-family: "promo1";
+    src: url("bigs.TTF");
+  }
+
+  @font-face {
+    font-family: "promo";
+    src: url("promo.TTF");
+  }
+  
+  @font-face {
+      font-family: "humanoide";
+      src: url("HUMANOID.TTF");
+    }
+  @font-face {
+      font-family: "russo";
+      src: url("russo.ttf");
+    }
+  
+  @font-face {
+      font-family: "jura";
+      src: url("jura.ttf");
+    }
+  @font-face {
+      font-family: "header";
+      src: url("header.ttf");
+    }
+    @font-face {
+      font-family: "container";
+      src: url("container.ttf");
+    }
+  
+  @font-face {
+      font-family: "supex";
+      src: url("supex.ttf");
+    }
+   
+  @font-face {
+      font-family: "hollow";
+      src: url("hollow.ttf");
+    }
+  
+  @font-face {
+      font-family: "orbi";
+      src: url("orbi.ttf");
+    }
+    @font-face {
+      font-family: "siracha";
+      src: url("siracha.ttf");
+    }
+  
+    body{
+      font-family: 'orbi';
+    }
+  
+    .vpn-text{
+      font-family: 'siracha';
+      font-weight:bold
+    }
+  
+   
+    
+    .button {
+      animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+      transform: translate3d(0, 0, 0);
+      perspective: 1000px;
+    }
+    
+     
+  
+    @keyframes shake {
+      10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+      }
+      20%, 80% {
+        transform: translate3d(2px, 0, 0);
+      }
+      30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+      }
+      40%, 60% {
+        transform: translate3d(4px, 0, 0);
+      }
+    }
+  
+  
+  
+    
+  #tvcontainer {
+   
+      margin: auto;
+    }
+    
+    #monitor {
+        background: #000; 
+        position: relative;
+        border-top: 3px solid #888; 
+        margin: 5%;
+        padding: 2% 2% 4% 2%; 
+        border-radius: 10px; 
+        border-bottom-left-radius: 50% 2%; 
+        border-bottom-right-radius: 50% 2%; 
+        transition: margin-right 1s;
+        
+    }
+    
+    #monitor:after {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: 3%;
+        left: 36%;
+        height: .5%; 
+        width: 28%;
+        background: #ddd; 
+        border-radius: 50%; 
+        box-shadow: 0 0 3px 0 white; 
+    }
+    
+    #monitorscreen {
+        position: relative;
+      
+        background-size: cover; 
+        background-position: top center;
+        height: 0; 
+        padding-bottom: 56.25%; 
+        position: relative;
+        overflow: hidden;
+    }
+     
+    
+    @media all and (min-width: 960px) {
+        #monitor {
+            -webkit-animation: tvflicker .2s infinite alternate; 
+            -moz-animation:    tvflicker .5s infinite alternate; 
+            -o-animation:      tvflicker .5s infinite alternate; 
+            animation:         tvflicker .5s infinite alternate; 
+        }
+    
+        @-webkit-keyframes tvflicker {
+          0%   { box-shadow: 0 0 100px 0 rgba(200,235,255,0.4); }
+          100% { box-shadow: 0 0 95px 0 rgba(200,230,255,0.45); }
+        }
+        @-moz-keyframes tvflicker {
+          0%   { box-shadow: 0 0 100px 0 rgba(225,235,255,0.4); }
+          100% { box-shadow: 0 0 60px 0 rgba(200,220,255,0.6); }
+        }
+        @-o-keyframes tvflicker {
+          0%   { box-shadow: 0 0 100px 0 rgba(225,235,255,0.4); }
+          100% { box-shadow: 0 0 60px 0 rgba(200,220,255,0.6); }
+        }
+        @keyframes tvflicker {
+          0%   { box-shadow: 0 0 100px 0 rgba(225,235,255,0.4); }
+          100% { box-shadow: 0 0 60px 0 rgba(200,220,255,0.6); }
+        }
+    }
+  
+    /* width */
+  ::-webkit-scrollbar {
+      width: 1px;
+    }
+    
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: transparent; 
+    }
+     
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: transparent; 
+    }
+    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: transparent; 
+    }
+
+
+    @media (pointer:none), (pointer:coarse) {
+    
+
+      html {
+        position: fixed;
+        height: 100%;
+        overflow: hidden;
+      }
+      
+      body {
+        margin: 0;
+        width: 100vw; 
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+      }
+    
+    
+    .container{
+        float:left;
+        border:2px solid transparent;
+        background:black;
+        height: 50px;
+        width:350px;
+        margin-top:2px;
+        padding-top:5px;
+        font-size: 18px;
+     
+    } 
+    .infoCard{
+      z-index: -99999999999999999;
+    }
+    #vpn-title{
+     
+    }
+    header{
+      position:fixed
+    }
+    .widgetCarrier{
+        position:fixed;
+         height: 150px;
+        width:2000px;
+        flex-shrink: 0;
+        z-index: 999999999;
+    display: none;
+    }
+    
+    .widgetCarrier2{
+      position:fixed;
+      bottom:0px;
+          height: 50px;
+        width:2000px; 
+        margin-top: 100px;
+        z-index: 999999999;
+    }
+
+    
+    }
+
+
+    #email_suscription{
+      width:30%;
+      padding:13px;
+      border-radius:250px;
+
+    }
+ 

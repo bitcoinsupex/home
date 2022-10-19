@@ -1,0 +1,38 @@
+$(document).ready(function () {
+  const $selectLangBtn = $('#select-language');
+  const $selectLangBtnText = $selectLangBtn.find('span');
+  const $languageList = $('#languages');
+  const $langOptions = $('.lang-option');
+  const langInPath = getLanguageInPath().replace('_', '-');
+  const $currentLangOption = $(`.lang-option[hreflang=${langInPath}]`);
+  // If empty, either there is not lang in path or the lang isn't a paid one
+  $langOptions.removeClass('selected');
+  if ($currentLangOption.length === 0) {
+    $selectLangBtnText.text($("#i18n-languages_span").text());
+  } else {
+    $currentLangOption.addClass('selected');
+    $selectLangBtnText.text($currentLangOption.find('span').text());
+  }
+
+  $selectLangBtn.on('click', function(event) {
+    event.stopPropagation();
+    if ($(this).attr("aria-expanded") === "false") {
+        $(this).attr("aria-expanded", "true");
+        $(this).find('.material-icons-outlined').html('arrow_drop_up');
+        $languageList.addClass("expanded");
+    } else {
+        $(this).attr("aria-expanded", "false");
+        $(this).find('.material-icons-outlined').html('arrow_drop_down');
+        $languageList.removeClass("expanded");
+    }
+  });
+
+  $('body').on('click mouseover', function(event) {
+    const insideLanguageDOM = $(event.target).closest('#language-dropdown-container').length > 0;
+    if ($('#languages').is(":visible") && !insideLanguageDOM) {
+      $selectLangBtn.attr("aria-expanded", "false");
+      $selectLangBtn.find('.material-icons-outlined').html('arrow_drop_down');
+      $languageList.removeClass("expanded");
+    }
+  });
+});

@@ -1,0 +1,218 @@
+const EU_GEOS = ["AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IS", "IT", "LI", "LT", "LU", "LV", "MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "XX", "T1"];
+const GA_MEASUREMENT_ID = "UA-30459713-5";
+const SIX_MONTHS_IN_SECS = 15780000;
+const AB_GA_COOKIE = '_AB_ga';
+
+$(document).ready(function() {
+  const dom = {
+    banner: {
+      cookieBanner: $('#cookie-banner'),
+      acceptAllBtn: $("#accept"),
+      settingsBtn: $("#cookie-settings"),
+      savePreferencesBtn: $("#save-preferences"),
+      cookieModal: $("#settings-modal"),
+      modalContainer: $("#settings-modal-container"),
+      gaCookieInput: $("#settings-modal input[name='_AB_ga']")
+    },
+    privacyPage: {
+      settingsBtn: $("#cookie-settings-privacy"),
+      savePreferencesBtn: $("#save-preferences-privacy"),
+      cookieModal: $("#settings-modal-privacy"),
+      modalContainer: $("#settings-modal-container-privacy"),
+      gaCookieInput: $("#settings-modal-privacy input[name='_AB_ga']"),
+    },
+    bodyTag: $("body"),
+    cookieToggableInputs: $(".switch > input.toggable")
+  }
+
+  const domain = window.location.hostname
+    .split(".").slice(-2).join(".")
+    .split(":")[0];
+
+  const setCookie = function(name, value, seconds=SIX_MONTHS_IN_SECS) {
+    if (name === AB_GA_COOKIE) {
+      document.cookie = `${name}=${value}; max-age=${seconds}; path=/`;
+    } else {
+      document.cookie = `${name}=${value}; max-age=${seconds}; domain=${domain}; path=/`;
+    }
+  };
+
+  const deleteAllCookies = function() {
+    const cookies = document.cookie.split(";");
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].split("=")[0].trim();
+      setCookie(cookie, '', 0);
+    }
+  };
+  const disableGA = function() {
+    $('script').each(function() {
+      if (this.src.includes('/js/ga.js')) {
+        this.parentNode.removeChild(this);
+      }
+    });
+    window[`ga-disable-${GA_MEASUREMENT_ID}`] = true;
+    deleteAllCookies();
+  }
+  const isEuGeo = EU_GEOS.includes(adblockGeo.countryCode);
+  if (isEuGeo || !adblockGeo || !adblockGeo.countryCode) {
+    disableGA();
+    // Hide cookie settings in privacy page if EU
+    dom.privacyPage.modalContainer.addClass("eu");
+    return;
+  }
+
+  // Utility functions for logic on page load
+
+  const injectGA = function () {
+    let script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = window.GA_CACHE_BUSTED_URL || '/js/ga.js';
+    document.head.appendChild(script);
+  };
+  const getBannerHeight = function() {
+    const isBannerVisible = dom.banner.cookieBanner.is(":visible");
+    return isBannerVisible ? dom.banner.cookieBanner.innerHeight() : 0;
+  }
+  const setBodyMarginBottom = function(marginBottom = 0) {
+    dom.bodyTag.css("margin-bottom", marginBottom);
+  }
+  // Reset settings to default or current cookie value
+  const resetSettingsInModal = function() {
+    dom.cookieToggableInputs.each(function(_, input) {
+      const thisCookieName = `${$(input).attr("name")}=`;
+      if (document.cookie.includes(thisCookieName)) {
+        const cookieValue = document.cookie
+          .split('; ')
+          .find(row => row.startsWith(thisCookieName))
+          .split('=')[1];
+        $(input).prop("checked", cookieValue === 'true' ? true : false);
+        $(input).next(".material-icons").text(cookieValue === 'true' ? "toggle_on" : "toggle_off");
+      } else {
+        $(input).prop("checked", true);
+        $(input).next(".material-icons").text("toggle_on");
+      }
+    });
+  }
+
+  // On page load choose if to show or not the cookie banner based on cookie preferences
+
+  if (document.cookie.includes(`${AB_GA_COOKIE}=`)) {
+    const cookieValue = document.cookie
+      .split('; ')
+      .find(row => row.startsWith(`${AB_GA_COOKIE}=`))
+      .split('=')[1];
+    if (cookieValue == 'true') {
+      injectGA();
+    }
+  } else {
+    dom.banner.cookieBanner.fadeIn({
+      duration: 600,
+      easing: 'linear',
+      complete: function() {
+        setBodyMarginBottom(getBannerHeight());
+      }
+    });
+  }
+
+  // On page load make sure modal's settings reflects default or user's saved cookie
+  resetSettingsInModal();
+
+  // Utility functions for event handlers
+
+  const deleteUnnecessaryCookies = function() {
+    const cookies = document.cookie.split(";");
+
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].split("=")[0].trim();
+
+      if (cookie !== AB_GA_COOKIE) {
+        setCookie(cookie, '', 0);
+      }
+    }
+  };
+
+  const closeCookieBanner = function() {
+    dom.banner.cookieBanner.fadeOut({
+      duration: 600,
+      easing: 'linear',
+      complete: function() {
+        setBodyMarginBottom(0);
+      }
+    });
+  }
+  const closeCookieModal = function(source="banner") {
+    dom[source]['cookieModal'].fadeOut({ duration: 600, easing: 'linear' });
+    dom[source]['modalContainer'].removeClass("opened");
+    dom[source]['settingsBtn'].attr("aria-expanded", "false");
+  }
+  const saveUserPreferences = function(trackingEnabled=true, source="banner") {
+    setCookie(AB_GA_COOKIE, trackingEnabled);
+    closeCookieBanner();
+    closeCookieModal(source);
+    if (trackingEnabled == false) {
+      deleteUnnecessaryCookies();
+    }
+    window[`ga-disable-${GA_MEASUREMENT_ID}`] = !trackingEnabled;
+  }
+
+  // Click, change and other event handlers
+
+  dom.banner.acceptAllBtn.on("click", function() {
+    saveUserPreferences(true, "banner");
+  });
+  dom.banner.savePreferencesBtn.on("click", function() {
+    const gaCookieEnabled = dom.banner.gaCookieInput.is(":checked") ? true : false;
+    saveUserPreferences(gaCookieEnabled, "banner");
+  });
+  dom.privacyPage.savePreferencesBtn.on("click", function() {
+    const gaCookieEnabled = dom.privacyPage.gaCookieInput.is(":checked") ? true : false;
+    saveUserPreferences(gaCookieEnabled, "privacyPage");
+  });
+
+  const toggleModalView = function($clicked, source="banner") {
+    const expanded = $clicked.attr("aria-expanded") == "true" ? true : false;
+    if (expanded) {
+      closeCookieModal(source);
+    } else {
+      $clicked.attr("aria-expanded", "true");
+      dom[source]['modalContainer'].addClass("opened");
+      dom[source]['cookieModal'].fadeIn({
+        duration: 600,
+        easing: 'linear',
+        start: function() {
+          resetSettingsInModal();
+        }
+      });
+    }
+  };
+  dom.banner.settingsBtn.on("click", function (event) {
+    event.stopPropagation();
+    toggleModalView($(this), "banner");
+  });
+  dom.privacyPage.settingsBtn.on("click", function (event) {
+    event.stopPropagation();
+    toggleModalView($(this), "privacyPage");
+  });
+  dom.bodyTag.on('click', function(event) {
+    const insideBannerModal = $(event.target).closest(dom.banner.cookieModal).length > 0;
+    if (dom.banner.cookieModal.is(":visible") && !insideBannerModal) {
+      dom.banner.modalContainer.removeClass("opened");
+      dom.banner.settingsBtn.attr("aria-expanded", "false");
+    }
+    const insidePrivacyModal = $(event.target).closest(dom.privacyPage.cookieModal).length > 0;
+    if (dom.privacyPage.cookieModal.is(":visible") && !insidePrivacyModal) {
+      dom.privacyPage.modalContainer.removeClass("opened");
+      dom.privacyPage.settingsBtn.attr("aria-expanded", "false");
+    }
+  });
+  dom.cookieToggableInputs.on("change", function() {
+    const toggleIcon = $(this).next(".material-icons");
+    const isCookieSettingOn = $(this).is(":checked");
+    const materialIconName = isCookieSettingOn ? "toggle_on" : "toggle_off";
+    toggleIcon.text(materialIconName);
+  });
+  $(window).on("resize", function() {
+    const marginBottom = dom.banner.cookieBanner.is(":visible") ? `${getBannerHeight()}px` : '0';
+    setBodyMarginBottom(marginBottom);
+  });
+});
