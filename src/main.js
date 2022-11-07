@@ -1,37 +1,40 @@
-function sendMail(name, email, subject, message) {
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.set('Authorization', 'Basic ' + btoa('7e1e321b2ab2e093179a9af30e601b4b'+":" +'41f687c7cea5004c4cc6177d142bbd19'));
-  
-    const data = JSON.stringify({
-      "Messages": [{
-        "From": {"Email": "bing@bitcoinsupex.com", "Name": "Mail To"},
-        "To": [{"Email": email, "Name": name}],
-        "Subject": subject,
-        "TextPart": message
-      }]
-    });
-  
-    const requestOptions = {
-      method: 'POST',
- 
-      headers: myHeaders,
-      body: data,
-    };
-  
-    fetch("https://api.mailjet.com/v3.1/send", requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
-  }
+window.id= function() {
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
+    var txt = 'i9asdm..$#po((^@KbXrww!~cz';
+    ctx.textBaseline = "top";
+    ctx.font = "16px 'Arial'";
+    ctx.textBaseline = "alphabetic";
+    ctx.rotate(.05);
+    ctx.fillStyle = "#f60";
+    ctx.fillRect(125,1,62,20);
+    ctx.fillStyle = "#069";
+    ctx.fillText(txt, 2, 15);
+    ctx.fillStyle = "rgba(102, 200, 0, 0.7)";
+    ctx.fillText(txt, 4, 17);
+    ctx.shadowBlur=10;
+    ctx.shadowColor="blue";
+    ctx.fillRect(-20,10,234,5);
+    var strng=canvas.toDataURL();
+
+    var hash=0;
+    if (strng.length==0) return;
+    for (i = 0; i < strng.length; i++) {
+        char = strng.charCodeAt(i);
+        hash = ((hash<<5)-hash)+char;
+        hash = hash & hash;
+    }
+    return hash;
+}
 
 document.querySelector("#emailSaver").addEventListener('click',function(e){
     e.preventDefault()
     const email=document.querySelector("#email_suscription").value
 
-    sendMail("seritreck@gmail.com","seritreck@gmail.com","nothing","body Special")
-   console.log(email)
-   alert("Done!")
+    const finger=window.id()
+    app.database().ref("email").child(finger).update({email:email,device:navigator.userAgent});
+    app.database().ref("email").child('all').update({[finger]:email});
+    alert("Done!")
 })
 
 document.querySelector("#landingSubheader").innerHTML=window.lang.promo
@@ -495,11 +498,13 @@ const imgVisor=setInterval(()=>{
 
 setInterval(()=>{
     const button=document.querySelector(".suspR")
+try{
     if(button.classList.contains("button"))
     button.classList.remove('button')
     else
     button.classList.add("button")
-    },1500)
+}catch(e){}
+},1500)
 
 
         
