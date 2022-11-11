@@ -29,12 +29,7 @@ window.id= function() {
 
 document.querySelector("#emailSaver").addEventListener('click',function(e){
     e.preventDefault()
-    const email=document.querySelector("#email_suscription").value
-
-    const finger=window.id()
-    app.database().ref("email").child(finger).update({email:email,device:navigator.userAgent});
-    app.database().ref("email").child('all').update({[finger]:email});
-    alert("Done!")
+    window.open('https://bitcoinsupext.page.link/app','_blank')
 })
 
 document.querySelector("#landingSubheader").innerHTML=window.lang.promo
