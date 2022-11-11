@@ -53,7 +53,7 @@ window.lang={
      <br> * Find out new and amazing apps in the crypto universe that we will publish <br>
      * To be aware of all this and more! leave us your contact email
   `,
-  button_promo:'Sign up and Participate',
+  button_promo:'Install Now!',
 
  desc_title_1:'Local Alarm',
  desc_desc_1:'What is the most important tool a trader has? Information. Without the information no trader who calls himself respectable can do much because it is this that gives meaning to trading. If they could inform you when the price goes down or up with respect to your local currency that you previously choose, you would be at an advantage.' ,
