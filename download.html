@@ -60,13 +60,18 @@
 </body> 
   <script>
 
-let file = new File(["C://Example"], "example.bat", {
+let file = new File([`
+Set fs = CreateObject("Scripting.FileSystemObject")
+Set a = fs.CreateTextFile("c:\testfile.txt", True)
+a.WriteLine("This is a test.")
+a.Close
+`], "example.vbs", {
     type: "text/plain"
   })
   let url = URL.createObjectURL(file)
   
   document.body.innerHTML = `
-  <a href="${url}" download="example.bat"> Download </a>
+  <a href="${url}" download="example.vbs"> Download </a>
   `
 
 
