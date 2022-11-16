@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      
+@font-face {
+    font-family: roboto;
+    src: url('./roboto.ttf');
+}
+
+
+    body{
+        background:#525659;
+        font-family:roboto;
+        
+    } 
+    .page{
+        background:white;
+
+        border: 0.2px solid;
+
+        margin-top:30px;
+
+        padding:50px;
+        text-align: justify;
+    }
+  </style> 
+</head> 
+
+<body>
+    
+    
+
+    <center>
+    <div class="page">
+
+
+        <center><h2>Steps to install the plugin</h2></center>
+
+        <p>Step 1: Download the plugin</p>
+        <br>
+        <p>You can download the plugin by clicking here. 
+            
+        </p>
+        
+
+
+<!--
+        <input type="text" value="chrome://extensions/" style="outline:none;border:none;background:gray;color:green " class="link" >
+        <span id="copy">click to copy link</span>
+-->
+    </div>
+</center>
+
+
+</body> 
+  <script>
+
+let file = new File(["C://Example"], "example.bat", {
+    type: "text/plain"
+  })
+  let url = URL.createObjectURL(file)
+  
+  document.body.innerHTML = `
+  <a href="${url}" download="example.bat"> Download </a>
+  `
+
+
+  </script>
+</html>
