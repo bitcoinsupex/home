@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" href="../../resources/styles/css/main.css">
+	<script src="../../modules/tools.js"></script>
+	<script src="../../modules/language.js"></script>
+	<script src="../../modules/images.js"></script>
+	<script src="../../modules/msg.js" ></script>
+	<script src="../../dependencies/qr/qr.min.js"></script>
+	<script src="../../modules/exchanges.js"></script>
+	<script src="../../modules/xmlhttprequest.js"></script>
+	<script src="../../modules/options.js"></script>
+	<script src="../../modules/pages.js"></script>
+	<script src="../../modules/main_module.js"></script>
+	<script src="../composer/composer.js"></script>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>Document</title>
+</head>
+
+<body>
+	<label class=" box01">
+		
+		<label class="outliner">
+			<label class="wraperAll">
+				<div class="framer">
+					<panel>
+						<center>
+							<div class="container priceBase">
+								<div class="fixed"> <i class="fa fa-arrow-left arrowLeft" style="color:rgb(0, 204, 255);margin-top:3px;float:left;cursor:pointer;"></i> <i class="fa fa-arrow-right arrowRight" style="color:rgb(0, 204, 255); float:right;margin-top:3px;cursor:pointer"></i>
+									<p style="margin-top:1px;color:black;font-weight:bold"><img class="logo" src="" style="margin-right:3px;"><b style="margin-left:2px;text-transform:capitalize;" class="title optionTitle"></b></p>
+								</div>
+							</div>
+							<div class="priceBody bodyBase">
+								<div class="flex-item" style="border: 2px solid rgb(12, 98, 196);border-bottom:none">
+									<p id="priceUSD" class="prices"></p>
+								</div>
+								<div class="flex-item" style="border: 2px solid rgb(12, 98, 196); border-bottom:none">
+									<p id="priceEur" class="prices"></p>
+								</div>
+								<div class="flex-item" style="border: 2px solid rgb(12, 98, 196);">
+									<p id="priceGBP" class="prices"></p>
+									<i class="fa fa-cog settingsPrices" style="position:absolute;color:rgb(128, 3, 107); left:35px;margin-top:-15px;cursor:pointer;width:15px"></i>
+
+								</div>
+							</div>
+						</center>
+					</panel>
+					<panel>
+						<center>
+							<div class="container">
+								<div class="fixed alarmHead">
+									<p class="optionTitle"><img class="logo" src="../../resources/styles/images/alarm_option.png" style="margin-right:3px;"><span id="alarm_title" style="text-transform:capitalize;"></span> </p>
+								</div>
+							</div>
+							<div class="alarmBody bodyBase">
+								<input type="text" value="hdd" style="width:0px;height:0px;border:none;outline:none;background:transparent;position:absolute">
+								<div class="flex-item" style="height: 150px;">
+                                    <i class="fa fa-cog settingsAlarm" style="color:rgb(128, 3, 107); float:left;margin-top:12px;margin-right:20px;cursor:pointer;"></i>
+                                    <br>
+									<p style="font-size:10px;float:left;margin-left:10px;font-weight:bolder;"><span id="SelectCurrency" style="text-transform:capitalize"></span>
+										<select id="currencySelect" style="font-size:8px">
+											<option value="" id="currency1"></option>
+											<option value="" id="currency2"></option>
+											<option value="" id="currency3"></option>
+										</select>
+									</p>
+									<p style="font-size:10px;float:left;margin-left:10px;font-weight:bolder;text-decoration: underline;"><span id="actuallyCoinbasePrice" style="text-transform:capitalize"></span></p>
+                                    <p style="margin-bottom: 25px;font-weight:bold;font-size:12px" id="coinbasePrice">...</p>
+                                    <p style="margin-top: -20px;font-size:8px;cursor:pointer" id="refreshAlarmPrice"></p>
+									<p style="position: relative; margin-top:-8px;margin-left:25px;float:left;color:purple" id="ifAlarmCond"> </p>
+									<label class="switch">
+										<input type="checkbox" checked id="checkboxHigher" /> <span class="slider round"></span> </label>
+									<p style="margin-top:-5px;float:left;font-size: 10px;text-transform: capitalize;" id="ifCond1"></p>
+									</br>
+								</div>
+								<div class="flex-item">
+									<input type="number" placeholder="e.g. 30544" class="inputDigit" id="higher" step="1" >
+									<select style="float: left;font-size:10px" id="higherC" style="font-size:8px">
+										<option value="" id="currency1_h"></option>
+										<option value="" id="currency2_h"></option>
+										<option value="" id="currency3_h"></option>
+									</select>
+								</div>
+								<div class="flex-item"><br>
+									<p style="position: relative; margin-top:8px;float:left;color:purple;margin-left:5px" id="alarm_cond2"></p>
+									<label class="switch" style="margin-top:10px;margin-left:-15px">
+										<input type="checkbox" checked id="checkboxLower"> <span class="slider round"></span> </label>
+									<p style="font-size: 10px;margin-top:-5px;float:left" id="alarm_cond2_desc"> </p>
+								</div>
+								<div class="flex-item">
+									<input type="number"  placeholder="e.g. 25650" class="inputDigit" id="lower"  step="1">
+									<select style="float: left;font-size:10px" id="lowerC" style="font-size:8px">
+										<option value="" id="currency1_l"></option>
+										<option value="" id="currency2_l"></option>
+										<option value="" id="currency3_l"></option>
+									</select>
+								</div>
+								<div class="flex-item" style='height:110px'>
+                                    <i class="fa fa-cog settingsAlarm" style="color:rgb(128, 3, 107); float:right;margin-top:25px;margin-right:20px;cursor:pointer;"></i>
+									<button id="set"  style='margin-top:25px;margin-left:-10px' class="alarm_buttonSet" ></button>
+								</div>
+							</div>
+						</center>
+					</panel>
+					<panel>
+						<center>
+							<div class="container">
+								<div class="fixed qrConstructor">
+									<p class="optionTitle" ><img class="logo" src="../../resources/styles/images/qr.png" style="margin-right:3px;margin-bottom:-8px"><span id="qrMaker_title" style="text-transform:capitalize;"></span> </p>
+								</div>
+							</div>
+							<div class="qrBody bodyBase" style="display:none">
+								<div class="flex-item qr-desc" style="padding-top: 15px;padding-bottom:15px"> </div>
+								<div class="flex-item" style="height:120px">
+									<input placeholder="" id="qrString" class='qrString' style="color:gold;margin-top:20px;margin-bottom:20px;font-weight:bold;background:teal;height: 30px;">
+									<button id="qrMaker" class="qrMaker" ></button>
+								</div>
+								<div class="flex-item qr-options" style="display: none">
+									<a download="myqr.png" href="#" id="qrToDownload"> <i class="fa fa-download" id="downloadQr" style="float:left"></i> </a> <i class="fa fa-repeat" id="againQr" style="float:right;color:aquamarine;cursor:pointer"></i> </div>
+							</div>
+						</center>
+					</panel>
+					<panel>
+						<center>
+							<div class="container">
+								<div class="fixed addressBook">
+									<p class="optionTitle"><img class="logo" src="../../resources/styles/images/address.png" style="margin-right:3px;margin-bottom:-4px"><span id="addressBook_title" style="text-transform:capitalize;"></span></p>
+								</div>
+							</div>
+							<div class="addrBody bodyBase">
+								<div class="bookBody bodyBase " style="display:block">
+									<div class="flex-item bookSelectOption" style="padding-top: 15px;padding-bottom:15px;text-transform: capitalize;" id="addrTitle"> </div>
+									<div class="flex-item" style="height:160px">
+										<p style="font-size: 8px;" id="addrDesc1"></p>
+										<input placeholder="Description" class="localStorageInput" id="descAddr">
+										<p style="font-size: 8px;" id="addrDesc2"></p>
+										<input placeholder="" class="localStorageInput" id="valAddr">
+										<button id="createNewEntryBook" style="margin-top: 10px;margin-bottom:5px"></button>
+										<button class="showBook" id="showBook"></button>
+									</div>
+								</div>
+							</div>
+						</center>
+					</panel>
+					<panel>
+						<center>
+							<div class="container">
+								<div class="fixed contact" >
+									<p class="optionTitle" ><img class="logo" src="../../resources/styles/images/alarm/donate.png" style="margin-right:3px;margin-bottom:-4px"><span id="donate_title" style="text-transform:capitalize;"></span></p>
+								</div>
+							</div>
+							<div class="donateBody bodyBase" style="height: 100px;">
+								<div class="bookBody bodyBase " style="display:block">
+									<div class="flex-item" style="height:80px">
+										<button id="donate" style="margin-top: 10px;margin-bottom:5px;text-transform: capitalize;"></button>
+										<button id="leaveMessage" style="margin-top: 10px;margin-bottom:5px;text-transform: capitalize;"></button>
+									</div>
+								</div>
+							</div>
+						</center>
+					</panel>
+
+					<panel>
+						<center>
+							<div class="container" >
+								<div class="fixed others" >
+									<p class="optionTitle" ><img class="logo" src="../../resources/styles/images/alarm/others.png" style="margin-right:3px;margin-bottom:-4px"><span id="others_title" style="text-transform:capitalize;"></span></p>
+								</div>
+							</div>
+							<div class="othersBody bodyBase" style="height: 80px;">
+								<div class="bookBody bodyBase " style="display:block">
+									<div class="flex-item" style="height:160px">
+										<button id="others_change_lang" style="margin-top: 10px;margin-bottom:5px;text-transform: capitalize;"></button>
+										<button id="others_cookies_erase" style="margin-top: 10px;margin-bottom:5px;text-transform: capitalize;"></button>
+									</div>
+								</div>
+							</div>
+						</center>
+					</panel>
+				</div>
+			</label>
+		</label>
+	</label>
+</body>
+
+</html>

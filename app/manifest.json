@@ -1,0 +1,61 @@
+{
+    "name": "Bitcoin SuperExtension Supex ",
+    "description": "create custom alarms, real time price, address book and much more",
+    "version": "1.0.1",
+    "manifest_version": 3,
+    "icons": {              
+      "16": "/directories/resources/styles/images/bitcoin2.png",   
+      "24": "/directories/resources/styles/images/sp_original.png",   
+      "32": "/directories/resources/styles/images/bitcoin2.png",    
+      "48": "/directories/resources/styles/images/bitcoin2.png"    
+    },
+    "action": {
+   
+      "default_title": "BITCOIN SUPEX",  
+      "default_popup": "/directories/flow/popup/main.htm" 
+    },
+    "permissions": [
+      
+      "scripting",
+        "alarms",
+        "storage",
+        "notifications",
+        "contextMenus",
+        "activeTab",
+        "cookies",
+        "tabs"
+              ], 
+    "web_accessible_resources": [
+      {
+        "resources": [ "run.js","/directories/resources/styles/images/alarm/*"],
+        "matches": [ "http://*/*","https://*/*" ]
+      }
+    ],
+
+    "background": {
+        "service_worker": "/directories/flow/service_worker/background.js"
+      },
+      "content_scripts": [
+        {
+          "matches": ["*://*/*"],
+          "css": ["/directories/resources/styles/css/contentScript.css"],
+          "js": [
+            "/directories/modules/images.js","/directories/dependencies/qr/qr.min.js",
+            "/directories/flow/contentScript/language.js",
+            "/directories/flow/contentScript/tools.js",
+            "/directories/flow/contentScript/qr.js",
+            "/directories/flow/contentScript/alarm.js",
+            "/directories/flow/contentScript/start.js",
+            "/directories/flow/contentScript/exchanges.js",
+            "/directories/flow/contentScript/constructor.js",
+            "/directories/flow/contentScript/onMessage.js",
+            "/directories/flow/contentScript/alerts.js",
+            "/directories/flow/contentScript/main.js"
+          ]
+
+
+        }
+      ],"host_permissions": ["<all_urls>"]
+
+    
+}

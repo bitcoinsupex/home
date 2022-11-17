@@ -1,0 +1,57 @@
+$(document).ready(function () {
+    $("li.nested-header").on("click", function (event) {
+        $(this).toggleClass("expanded");
+        const expanded = $(this).hasClass("expanded") ? "true" : "false";
+        $(this).find("button").attr("aria-expanded", expanded);
+        $(`#${$(this).data("nested-list-id")}`).toggleClass("expanded");
+        if ($(".nested-header-first").hasClass("expanded")) {
+            $("#first-hr").addClass("invisible");
+        } else {
+            $("#first-hr").removeClass("invisible");
+        }
+    });
+    $("#hamburger-menu-toggle").on("click", function () {
+        const $hamburgerMenu = $("#small-screen-menu");
+        if ($(this).attr("aria-expanded") == "false") {
+            $(this).attr("aria-expanded", "true");
+            $hamburgerMenu.addClass("expanded");
+        } else {
+            $(this).attr("aria-expanded", "false");
+            $hamburgerMenu.removeClass("expanded");
+        }
+    });
+
+
+    // Shows only Premium CTA if AdBlock is installed but without Premium activated
+    // We get this info only from injected DOM elements so we listen to DOM mutations
+    const targetNode = document.getElementsByTagName('body')[0];
+    const config = { childList: true };
+    const isVpnCTAvisible = !!$("#vpn-cta").is(":visible");
+
+    const callback = function(mutationsList, observer) {
+        for (const mutation of mutationsList) {
+            if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                const el = mutation.addedNodes[0];
+                if (el.id == 'isAdblockLicenseActive' && el.innerText == 'false') {
+                    observer.disconnect();
+                    $(".premium-cta").show();
+                    _logV2Message("nav_premium_cta_seen", {
+                        vpn_banner_cta: isVpnCTAvisible,
+                        s: getPlainSource()
+                    });
+                } else {
+                    $(".premium-cta").hide();
+                }
+            }
+        }
+    };
+    const observer = new MutationObserver(callback);
+    observer.observe(targetNode, config);
+
+    $(".premium-cta").on('click', function() {
+        _logV2Message("nav_premium_cta_clicked", {
+            vpn_banner_cta: isVpnCTAvisible,
+            s: getPlainSource()
+        });
+    });
+});

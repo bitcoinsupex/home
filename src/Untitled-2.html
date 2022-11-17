@@ -1,0 +1,16 @@
+<!-- END: Cookie notification snippet 
+
+    <div id="userpreferences">
+      chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+        console.log(tabs[0].url);
+        console.log(tabs[0].id);
+        my_tabid=tabs[0].id;
+    
+        console.log(my_tabid,"done");
+        chrome.scripting.executeScript(
+          {
+              target: {tabId: my_tabid},
+              code: `console.log('location:', window.location.href);`
+            });
+    }); 
+     --> 

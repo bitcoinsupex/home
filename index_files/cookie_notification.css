@@ -1,0 +1,233 @@
+#cookie-banner {
+  width: 100%;
+  min-width: 100%;
+  padding: 50px;
+  background-color: #fff;
+  z-index: 5;
+  position: fixed;
+  bottom: 0;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+  min-height: 170px;
+}
+#cookie_notification_banner {
+  height: fit-content;
+  height: -moz-fit-content;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  column-gap: 42px;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  row-gap: 60px;
+  margin: 0 auto;
+}
+#cookie-info {
+  display: flex;
+  align-items: center;
+  column-gap: 42px;
+  flex: 1;
+}
+#cookie-text {
+  margin: 0;
+  min-width: 518px;
+  max-width: 813px;
+  padding-right: 10px;
+}
+#cookie-text > a {
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+  color: #0047FF;
+}
+#cookie-actions {
+  display: flex;
+  column-gap: 24px;
+  margin-left: auto;
+}
+.cookie-btn {
+  min-width: 120px;
+  max-width: fit-content;
+  max-width: -moz-fit-content;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+  text-transform: capitalize;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 24px;
+}
+.cookie-btn:hover {
+  cursor: pointer;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
+}
+#cookie-settings {
+  font-weight: 400;
+  background: #FFFFFF;
+  border: 1px solid #FFFFFF;
+}
+#cookie-settings:hover {
+  border: 1px solid #333333;
+}
+#cookie-settings > i {
+  font-size: 24px;
+  color: #333;
+  margin-right: 8px;
+}
+#accept {
+  background: #E40D0D;
+  border: none;
+  color: white;
+}
+/* Modal */
+.cookie-settings-modal {
+  display: none;
+  position: absolute;
+  left: calc(50% - 150px);
+  bottom: calc(100% + 40px);
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
+  background-color: white;
+  padding: 24px 32px;
+  width: 300px;
+  max-width: 300px;
+  min-width: 300px;
+  height: fit-content;
+  height: -moz-fit-content;
+  min-height: 330px;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+#settings-modal-container-privacy.eu {
+  display: none;
+}
+#cookie-settings-privacy ~ .cookie-settings-modal {
+  bottom: calc(100% + 15px);
+}
+.modal-container {
+  display: inline;
+  position: relative;
+}
+.modal-container::after {
+  display: none;
+  content: "";
+  position: absolute;
+  bottom: calc(100% + 27px);
+  left: calc(50% - 15px);
+  border-width: 15px 15px 0;
+  border-style: solid;
+  border-color: white transparent;
+  width: 0;
+}
+#settings-modal-container-privacy::after {
+  bottom: calc(100% + 1px);
+}
+.modal-container.opened .cookie-settings-modal,
+.modal-container.opened::after {
+  display: block
+}
+.cookie-settings-modal li {
+  margin-bottom: 30px;
+  list-style-type: none;
+}
+.setting-name {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 140%;
+  color: #000000;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.setting-description {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 140%;
+  color: #000000;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  width: -moz-fit-content;
+  height: fit-content;
+  height: -moz-fit-content;
+}
+.switch > input {
+  opacity: 0;
+  top: 0;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  position: absolute;
+  z-index: 2;
+}
+.switch > input.toggable {
+  cursor: pointer;
+}
+.switch > i.material-icons {
+  color: #10B501;
+  opacity: 0.5;
+  top: 0;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  font-size: 28px;
+  position: absolute;
+  z-index: 1;
+}
+.switch > input:not(:checked) ~ i.material-icons {
+  filter: grayscale(100); 
+}
+input.toggable ~ i.material-icons {
+  opacity: 1;
+  cursor: pointer;
+}
+input.toggable:focus-visible ~ i.material-icons {
+  outline: rgb(0, 95, 204) auto 1px;
+}
+.save-preferences {
+  appearance: none;
+  border: none;
+  background: none;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 140%;
+  color: #2284F7;
+  float: right;
+  cursor: pointer;
+}
+
+#cookie-settings-privacy {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 140%;
+  color: #0047FF;
+  cursor: pointer;
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+@media screen and (max-width: 680px) {
+  #cookie-text {
+    min-width: 220px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .cookie-settings-modal {
+    left: 0;
+  }
+}

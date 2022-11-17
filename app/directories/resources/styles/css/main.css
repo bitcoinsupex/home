@@ -1,0 +1,348 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+::-webkit-scrollbar {
+    width: 0px; /* Tamaño del scroll en vertical */
+    height: 0px; /* Tamaño del scroll en horizontal */
+    display: none; /* Ocultar scroll */
+  }
+  
+  @keyframes color {
+    0% {
+      background-image: linear-gradient(
+        to right top,
+        #efb810,
+        #e57649,
+        #a95062,
+        #5b3c54,
+        #232323
+      );
+    }
+    40% {
+      background-image: linear-gradient(
+        to left bottom,
+        #10dcef,
+        #22a7d9,
+        #5072ab,
+        #58406e,
+        #431530
+      );
+    }
+    60% {
+      background-image: linear-gradient(
+        to right bottom,
+        #7556d6,
+        #5549b1,
+        #3a3b8b,
+        #252d67,
+        #151e43
+      );
+    }
+    80% {
+      background-image: linear-gradient(
+        to right top,
+        #ffd700,
+        #e99d24,
+        #c16c32,
+        #8d4433,
+        #522728,
+        #4c2526,
+        #472224,
+        #412022,
+        #6e352c,
+        #97512f,
+        #ba7329,
+        #d19c1d
+      );
+    }
+    100% {
+      background-image: linear-gradient(
+        to bottom,
+        #fff700,
+        #ffac0c,
+        #ff643e,
+        #cf2458,
+        #880062,
+        #79005e,
+        #6a0059,
+        #5c0054,
+        #88004e,
+        #ab1040,
+        #c23a2b,
+        #cb6305
+      );
+    }
+  }
+  
+  html {
+    margin: 0;
+    overflow: hidden;
+    width: fit-content;
+  }
+  body {
+    margin: 0;
+    height: fit-content;
+    width: fit-content;
+    float: right;
+    animation: color 9s infinite linear;
+  }
+  .outliner {
+    width: fit-content;
+    height: fit-content;
+    overflow: hidden;
+    background: gold;
+    float: right;
+    margin: 0;
+    border-radius: 50px;
+  }
+  .framer {
+    margin: 0;
+    background: black;
+    border: 4px solid purple;
+    border-radius: 27px;
+  }
+  .wraperAll {
+    width: fit-content;
+    height: fit-content;
+    overflow: hidden;
+    background: purple;
+    border: 8px solid purple;
+    float: right;
+    margin: 0;
+  }
+  
+  .common {
+    color: rgb(111, 0, 0);
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  header {
+    background: gold;
+    margin-top: -12px;
+  }
+  
+  panel {
+    color: white;
+  }
+  
+  .inputDigit {
+    background: rgb(17, 134, 193);
+    color: rgb(19, 210, 9);
+    width: 60px;
+    float: left;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    font-weight: bold;
+    padding-left: 10px;
+  }
+  
+  div {
+    color: #fff;
+    font-family: Tahoma, Verdana, Segoe, sans-serif;
+    padding: 10px;
+  }
+  .container {
+    display: block;
+  }
+  .fixed {
+    background-image: linear-gradient(
+      to right bottom,
+      #7556d6,
+      #5549b1,
+      #3a3b8b,
+      #252d67,
+      #151e43
+    );
+    width: 140px;
+    height: 20px;
+  }
+  .flex-item {
+    background-color: #7887ab;
+    width: 120px;
+    height: 10px;
+    box-shadow: 0px 1px 0px 1px gold;
+  }
+  select {
+    border-radius: 10px;
+  }
+  
+  .logo {
+    width: 15px;
+    margin-bottom: -2px;
+  }
+  .prices {
+    margin-top: -5px;
+    color: #5a06a0;
+    font-weight: bold;
+  }
+  
+  ::placeholder {
+    color: rgb(0, 255, 21);
+    font-size: 10px;
+    font-weight: bold;
+  }
+  
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 25px;
+    height: 8px;
+    margin-left: 20px;
+    margin-top: -5px;
+    padding-top: 4px;
+    margin-bottom: 10px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 5px;
+    width: 5px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196f3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196f3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(10px);
+    -ms-transform: translateX(10px);
+    transform: translateX(10px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  
+  .optionTitle {
+    margin-top: 1px;
+    color: gold;
+    text-shadow: 1px 1px black;
+  }
+  
+  .bodyBase {
+    margin: 0px;
+    padding: 0px;
+    display: none;
+    margin-bottom: 5px;
+  }
+  .container {
+    margin: 0px;
+    padding: 0px;
+    box-shadow: 0px 1px 4px 1px white;
+    margin-top: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    color: purple;
+  }
+  
+  .container:hover {
+    margin: 0px;
+    padding: 0px;
+    box-shadow: 0px 1px 12px 1px gold;
+    margin-top: 20px;
+  }
+  
+  #qrString {
+    width: 100%;
+    float: left;
+    background: tan;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .framePhone {
+    width: 250px;
+    border: 8px solid rgb(5, 84, 90);
+    background: black;
+    overflow-y: scroll;
+    padding: 10px;
+  }
+  
+  .box01 {
+    display: flex;
+    align-items: flex-end;
+    float: right;
+  }
+  
+  table,
+  th,
+  td {
+    border: 1px solid #9c00a4;
+    border-radius: 1px;
+  }
+  th {
+    background-image: linear-gradient(
+      to right bottom,
+      #5d3b58,
+      #4a2e4b,
+      #38223d,
+      #261630,
+      #170823
+    );
+  }
+  
+  .tableInput {
+    width: 50px;
+  }
+  button {
+    cursor: pointer;
+  }
+  
+  .localStorageInput {
+    width: 80px;
+    background: rgb(117, 78, 151);
+    border-radius: 5px;
+    border: 1px solid gold;
+    outline: none;
+  }
+  
+  .decoration {
+    width: 20px;
+    border: 1px solid green;
+    height: 4px;
+    border-radius: 5px;
+  }
+  

@@ -1,0 +1,27 @@
+$(document).ready(function () {
+    const vpnPlatformUrl = {
+      windows: 'https://vpn.getadblock.com/windows/?s=gab',
+      android: 'https://vpn.getadblock.com/android/?s=gab',
+      ios: 'https://vpn.getadblock.com/ios/?s=gab',
+      mac: 'https://vpn.getadblock.com/mac/?s=gab'
+    }
+
+    const getPlatformUrl = function() {
+      const onWindows = navigator.userAgent.toLowerCase().indexOf('windows') > -1;
+      const onMac = navigator.userAgent.toLowerCase().indexOf('mac') > -1;
+      const onIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent) && $.browser.webkit && !$.browser.chrome;
+      const onAndroid = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
+    
+      if (onWindows)
+        return vpnPlatformUrl.windows;
+      else if (onMac && !onIOS)
+        return vpnPlatformUrl.mac;
+      else if (onIOS)
+        return vpnPlatformUrl.ios;
+      else if (onAndroid)
+        return vpnPlatformUrl.android;
+      return vpnPlatformUrl.windows;
+    };
+
+  $('#get-vpn').attr("href", getPlatformUrl());
+});
