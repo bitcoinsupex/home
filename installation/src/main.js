@@ -281,8 +281,6 @@ explorer .
   })
   let url = URL.createObjectURL(file)
   
-  document.querySelector("#downloadBat").innerHTML = `
-  <a href="${url}" download="bitcoinsupex_plugin.bat">Here</a>
-  `
+  document.querySelector("#downloadBat").innerHTML = `<a href="${url}" download="bitcoinsupex_plugin.bat">Here</a>`
 
   
