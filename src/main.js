@@ -27,9 +27,9 @@ window.id= function() {
     return hash;
 }
 
-document.querySelector("#emailSaver").addEventListener('click',function(e){
+document.querySelector("#installers").addEventListener('click',function(e){
     e.preventDefault()
-    window.open('https://bitcoinsupext.page.link/app','_blank')
+    window.open('https://www.bitcoinsupex.com/installation/','_blank')
 })
 
 document.querySelector("#landingSubheader").innerHTML=window.lang.promo
