@@ -49,9 +49,9 @@ window.lang={
     ],
 
     promo:`
-    * Receive Promotions, * Contest for Gift Cards, * Get Discount Coupons
-     <br> * Find out new and amazing apps in the crypto universe that we will publish <br>
-     * To be aware of all this and more! leave us your contact email
+    * Set alarms based on your choice of local currencies, select up to three local currencies 
+    <br>in which you can see the price in your toolbar, address book to associate addresses with tags
+       
   `,
   button_promo:'Installation!',
 
