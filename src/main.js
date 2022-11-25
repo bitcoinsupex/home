@@ -47,7 +47,7 @@ document.querySelector("#desc_desc_3").innerHTML=window.lang.desc_desc_3
 document.querySelector("#desc_title_4").innerHTML=window.lang.desc_title_4
 document.querySelector("#desc_desc_4").innerHTML=window.lang.desc_desc_4
 
-document.querySelector("#patners").textContent=window.lang.patner
+//document.querySelector("#patners").textContent=window.lang.patner
 
 document.querySelector("#opn1").textContent=window.lang.opinion_1
 document.querySelector("#opn2").textContent=window.lang.opinion_2
