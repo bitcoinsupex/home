@@ -1,4 +1,4 @@
-const lang={
+{
     main:{
         title:'Log in to your Skrill account',
         dont:"Don't have an account? ",
